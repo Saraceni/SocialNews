@@ -1,0 +1,38 @@
+<div class="container" >
+  <app-input-filter (searchInput)="getPosts($event)"></app-input-filter>
+</div>
+
+<div class="loader" *ngIf="isLoading"></div>
+
+<div class="alert alert-danger" *ngIf="error">
+  <strong>Error!</strong> Something went wrong when retrieving the data. Please try again in a few seconds.
+</div>
+
+<div class="alert alert-info" *ngIf="numberOfPosts == 0">
+  <strong>Sorry!</strong> No posts matching the query were found.
+</div>
+
+<div class="container" >
+    <div class="row">
+      <ng-template ngFor let-index="index" let-post [ngForOf]="posts | async">
+      <div class="item">
+        <div class="well">
+          <div *ngIf="post.img_url">
+            <img [src]="post.img_url" [class]="post.source == 0 ? 'rounded-circle' : 'img-responsive'">
+          </div>
+          <div>
+            <span class="label label-primary">
+              {{post.author_name}}
+            </span>
+            <i class="fa fa-twitter" *ngIf="post.source == 0"></i>
+            <i class="fa fa-reddit" *ngIf="post.source == 1"></i>
+            <i class="fa fa-picture-o" *ngIf="post.source == 2"></i>
+            <h3>{{post.title}}</h3>
+            <p *ngIf="post.source == 0">{{post.description}}</p>
+            <a class="btn btn-default" [href]="post.post_url" target="_blank" role="button">Post Link</a>
+          </div>
+        </div>
+      </div>
+      </ng-template>
+    </div>
+</div>

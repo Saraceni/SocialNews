@@ -1,0 +1,4 @@
+/client/node_modules/*
+/client/dist/*
+/NodeServer/node_modules/*
+/NodeServer/dist/*

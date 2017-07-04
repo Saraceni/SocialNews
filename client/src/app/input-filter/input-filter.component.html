@@ -1,0 +1,10 @@
+<form>
+  <div class="input-group">
+    <input [(ngModel)]="searchQuery" type="text" class="form-control" placeholder="Search" name="input-search">
+    <div class="input-group-btn">
+      <button class="btn btn-default" type="submit" (click)="search($event, item)">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+    </div>
+  </div>
+</form>
