@@ -67,7 +67,9 @@ class AllSourcesApiController {
                     let redditData = this.mapRedditData(data[1]);
                     let imgurData = this.mapImgurData(data[2]);
                     let resultData = twitterData.concat(redditData).concat(imgurData); 
-                    shuffleArray(resultData);
+                    resultData.sort((a: QueryData, b: QueryData) => {
+                        return b.date.getTime() - a.date.getTime();
+                    });
                     res.send(resultData);
                 }).catch((err) => {
                     res.status(500).send(err);
