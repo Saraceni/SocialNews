@@ -42,7 +42,7 @@ export class TwitterAPI {
         
         return new Promise<SearchResult>((resolve, reject) => {
             let encodedQuery: string = encodeURIComponent(query);
-            let url = 'https://api.twitter.com/1.1/search/tweets.json?q=' + encodedQuery;
+            let url = 'https://api.twitter.com/1.1/search/tweets.json?q=' + encodedQuery + '&lang=pt';
             let bearer_auth: string = 'Bearer ' + this.access_token;
             let options: request.Options = {
                 url: url,

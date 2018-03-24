@@ -15,7 +15,8 @@ interface QueryData {
     author_name: string,
     title: string,
     description: string,
-    post_url: string
+    post_url: string,
+    date: Date
 }
 
 class AllSourcesApiController {
@@ -83,13 +84,16 @@ class AllSourcesApiController {
         let result: Array<QueryData> = [];
         let queryData: QueryData;
         for(let redditPost of redditData.data.children) {
+            let date = new Date(0);
+            date.setUTCSeconds(redditPost.data.created_utc);
             queryData = {
                 source: constants.source.reddit,
                 img_url: redditPost.data.preview ? redditPost.data.preview.images[0].source.url : null,
                 author_name: redditPost.data.author,
                 title: redditPost.data.title,
                 description: redditPost.data.selftext,
-                post_url: redditPost.data.url
+                post_url: redditPost.data.url,
+                date: date
             }
             result.push(queryData);
         }
@@ -106,7 +110,8 @@ class AllSourcesApiController {
                 author_name: twitterPost.user.screen_name,
                 title: null,
                 description: twitterPost.text,
-                post_url: 'https://twitter.com/i/web/status/' + twitterPost.id_str
+                post_url: 'https://twitter.com/i/web/status/' + twitterPost.id_str,
+                date: new Date(twitterPost.created_at)
             }
             result.push(queryData);
         }
@@ -117,13 +122,16 @@ class AllSourcesApiController {
         let result: Array<QueryData> = [];
         let queryData: QueryData;
         for(let imgurPost of imgurData.data) {
+            let date = new Date(0);
+            date.setUTCSeconds(imgurPost.datetime);
             queryData = {
                 source: constants.source.imgur,
                 img_url: imgurPost.is_album ? null : imgurPost.link,
                 author_name: imgurPost.account_url,
                 title: imgurPost.title,
                 description: null,
-                post_url: imgurPost.link
+                post_url: imgurPost.link,
+                date: date
             }
             result.push(queryData);
         }

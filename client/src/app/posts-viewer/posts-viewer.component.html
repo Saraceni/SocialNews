@@ -27,6 +27,7 @@
             <i class="fa fa-twitter" *ngIf="post.source == 0"></i>
             <i class="fa fa-reddit" *ngIf="post.source == 1"></i>
             <i class="fa fa-picture-o" *ngIf="post.source == 2"></i>
+            <p>{{post.date | date: "medium"}}</p>
             <h3>{{post.title}}</h3>
             <p *ngIf="post.source == 0">{{post.description}}</p>
             <a class="btn btn-default" [href]="post.post_url" target="_blank" role="button">Post Link</a>

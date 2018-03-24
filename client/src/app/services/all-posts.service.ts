@@ -13,7 +13,8 @@ export interface QueryData {
     author_name: string,
     title: string,
     description: string,
-    post_url: string
+    post_url: string,
+    date: Date
 }
 
 @Injectable()
